@@ -14,7 +14,11 @@ machine = TocMachine(
         'readnumber',
         'check',
         'getdata',
-        'deletedata'
+        'deletedata',
+        'other',
+        'domemo',
+        'memosave',
+        'memoload'
     ],
     transitions=[
         {
@@ -34,6 +38,30 @@ machine = TocMachine(
             'source': 'user',
             'dest': 'delete',
             'conditions': 'is_going_to_delete'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'user',
+            'dest': 'other',
+            'conditions': 'is_going_to_other'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'other',
+            'dest': 'domemo',
+            'conditions': 'is_going_to_save'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'domemo',
+            'dest': 'memosave',
+            'conditions': 'is_going_to_read'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'other',
+            'dest': 'memoload',
+            'conditions': 'is_going_to_load'
         },
         {
             'trigger': 'advance',
@@ -77,6 +105,8 @@ machine = TocMachine(
                 'deletedata',
                 'getdata',
                 'check',
+                'memosave',
+                'memoload'
             ],
             'dest': 'user'
         },
