@@ -13,49 +13,49 @@ class TocMachine(GraphMachine):
             **machine_configs
         )
     def is_going_to_user(self, event):
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             text = event['message']['text']
             return text.lower() == '..'
         return False
     def is_going_to_delete(self, event):
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             text = event['message']['text']
             return text.lower() == '刪除'
         return False
 
     def is_going_to_save(self, event):
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             text = event['message']['text']
             return text.lower() == '存檔'
         return False
     def is_going_to_other(self, event):
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             text = event['message']['text']
             return text.lower() == '備忘錄'
         return False
     def is_going_to_load(self, event):
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             text = event['message']['text']
             return text.lower() == '讀檔'
         return False
     def is_going_to_read(self, event):
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             text = event['message']['text']
             return text.lower() != '..' and text.lower() != ''
         return False
     def is_going_to_check(self, event):
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             text = event['message']['text']
             return text.lower() == '確認'
         return False
     def is_going_to_retrun(self, event):
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             text = event['message']['text']
             return text.lower() != '..' and text.lower() != '確認'
         return False
     def is_going_to_data(self, event):
         global date
-        if event.get("message"):
+        if event.get("message") and event['message'].get("text"):
             sender_id = event['sender']['id']
             date = event['message']['text']
             flag = str(date) in money
